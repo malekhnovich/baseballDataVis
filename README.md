@@ -25,5 +25,7 @@ Feedback
     required a person to look at it for a while to see the trend.
 3.The graph of hr and handedness  with average equailing x2 confuses the viewer of the graph
 "keep it simple"
+
 4. Bargraph of handedness and hr shows a specific trend that
 can be noticed right away.
+5. Why is there a k on the y axis and why isn't average showing the number as a decimal
