@@ -36,7 +36,7 @@
             //creating title for graph
             d3.select("body")
                 .append("h2")
-                .text("Baseball HR Average VS Handedness");
+                .text("Baseball HR/Average Total VS Handedness");
             //establishing chart size
             var svg = d3.select("body")
                 .append("svg")
@@ -55,12 +55,12 @@
            //category variable of handedness
             var x = myChart.addCategoryAxis("x", 'handedness');
             //using the averages because there is definately less 'both' handedness than left and right
-            x.aggregate =dimple.aggregateMethod.avg;
+
             //creating both y measures
             var y =myChart.addMeasureAxis('y',"HR");
             y.aggregate = dimple.aggregateMethod.avg;
             var y2 = myChart.addMeasureAxis('y','avg');
-
+            var f =d3.format(".1f");
             myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
             //putting the hr totals in order
             x.addOrderRule('HR',true);

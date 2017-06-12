@@ -1,10 +1,10 @@
 <h2>Summary</h2>
 
-The dataset I worked is the baseball data set. It consists
+The dataset I worked is the baseball data set, it consists
 of 1,157 baseball players. The baseball player's handedness,
 height (in inches), batting average, home runs, and weight(in pounds)
 were all aspects of each player. I decided to make the handedness of the players
-a categorical variable that I could use in comparison to the batter's average and homeruns hit.
+a categorical variable that I could use in comparison to the  batter's average and homeruns hit.
 I also decided to use the weight of the players because my reviewers hypothesized that heavier players
 would be stronger and hit more homeruns.
 
@@ -13,12 +13,14 @@ would be stronger and hit more homeruns.
 Immediately after I received the data, I knew I wanted to categorize the
 data based on a specific factor. I noticed that handedness was the only variable
 that could be categorized without cleaning the data. Initially, I decided to graph
-handedness of the data versus the batting average of the players in a lineplot. After
+handedness of the data versus the total batting average of the players in a lineplot. After
 receiving feedback, I determined that this did not provide a clear visual. I then switched
 to the 'HR' attribute of the data, standing for homeruns. I noticed that the correlation between
 homeruns and handedness was more noticeable visually. Again, after recieving feedback I decided to
 change the graph type from a scatter plot to a bargraph which would
-depict the handedness of the batters and their average homerun output appropritely.
+depict the handedness of the batters and their average homerun output appropritely. At first, I wondered whether to depict
+the averages or the total for the handedness of the players. I decided to use the totals after recieving feedback
+because it gathered all the players together.
 
 
 <h2>Feedback</h2>
@@ -35,6 +37,7 @@ can be noticed right away.
 6. Can we get the plot of the points to connect in order to show
 the trend of averages as well?
 7. Wouldn't weight be a significant factor in homeruns hit?
+8. The average still shows as a whole number rather than a decimal
 
 <h2>Resources</h2>
 Looked at http://bl.ocks.org/tybyers/736da90eefe0c347a1d6 to see how the graph in the lesson was created.
