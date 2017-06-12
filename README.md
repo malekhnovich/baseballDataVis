@@ -8,6 +8,23 @@ a categorical variable that I could use in comparison to the  batter's average a
 I also decided to use the weight of the players because my reviewers hypothesized that heavier players
 would be stronger and hit more homeruns.
 
+
+
+
+<h2>What makes a Good Baseball Player at the Plate?</h2>
+It is clear that baseball players who <b>weigh more</b> are overall
+more likely to hit homeruns  than baseball players that are lighter. This makes
+sense that heavier players would have more power and can launch the ball farther and
+even out of the stadium.
+
+<h2> How does Handedness Affect a baseball player's ability at the plate?</h2>
+There is a clear trend among baseball players in the data that shows that right-hand
+hitters are overall better hitters than both left-hand hitters and 'both'-hand hitters.
+Left-hand hitters might not be as strong and have a lower batting average than right-hand hitters,
+but they do hit more homeruns and hit for a higher average than both-hand hitters.
+
+
+
 <h2>Design</h2>
 
 Immediately after I received the data, I knew I wanted to categorize the
