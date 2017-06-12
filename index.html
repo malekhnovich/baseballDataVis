@@ -17,69 +17,98 @@
         }
     </style>
     <div id="chartContainer">
-    <script type="text/javascript">
-        //creating a container for the graph
-        var svg = dimple.newSvg("#chartContainer",590,400);
-        //main function where it all takes place
-        function draw(data) {
-            /*
-             D3.js setup code
-             */
+        <script type="text/javascript">
+            //creating a container for the graph
+            var svg = dimple.newSvg("#chartContainer",590,400);
+            //main function where it all takes place
+            function draw(data) {
+                /*
+                 D3.js setup code
+                 */
 
-            "use strict";
-            //commenting out debugger that was used to explore data
-            //debugger;
-            var margin = 75,
-                width = 1400 - margin,
-                height = 600 - margin;
+                "use strict";
+                //commenting out debugger that was used to explore data
+                //debugger;
+                var margin = 75,
+                    width = 1400 - margin,
+                    height = 600 - margin;
 
-            //creating title for graph
-            d3.select("body")
-                .append("h2")
-                .text("Baseball HR/Average Total VS Handedness");
-            //establishing chart size
-            var svg = d3.select("body")
-                .append("svg")
-                .attr("width", width + margin)
-                .attr("height", height + margin)
-                .append('g')
-                .attr('class','chart');
+                //creating title for graph
+                d3.select("body")
+                    .append("h2")
+                    .text("Baseball HR/Average Total VS Handedness");
+                //establishing chart size
+                var svg = d3.select("body")
+                    .append("svg")
+                    .attr("width", width + margin)
+                    .attr("height", height + margin)
+                    .append('g')
+                    .attr('class','chart');
 
-            /*
-             Dimple.js Chart construction code
-             */
+                /*
+                 Dimple.js Chart construction code
+                 */
 
-            var myChart = new dimple.chart(svg, data);
+                var myChart = new dimple.chart(svg, data);
 
 
-           //category variable of handedness
-            var x = myChart.addCategoryAxis("x", 'handedness');
-            //using the averages because there is definately less 'both' handedness than left and right
+                //category variable of handedness
+                var x = myChart.addCategoryAxis("x", 'handedness');
+                //using the averages because there is definately less 'both' handedness than left and right
 
-            //creating both y measures
-            var y =myChart.addMeasureAxis('y',"HR");
-            y.aggregate = dimple.aggregateMethod.avg;
-            var y2 = myChart.addMeasureAxis('y','avg');
-            var f =d3.format(".1f");
-            myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
-            //putting the hr totals in order
-            x.addOrderRule('HR',true);
-            //creating the bargraph
-            myChart.addSeries('Player', dimple.plot.bar);
-            //adding the animation based on the weight of the players
-            //there is a wide range of weight and the animation allows for the graph to reflect that neatly
-            myChart.setStoryboard("weight");
+                //creating both y measures
+                var y =myChart.addMeasureAxis('y',"HR");
+                //locking bounds
+                y.overrideMax = 2000;
+                y.overrideMin = 50;
 
-            myChart.draw();
-        };
+                y.aggregate = dimple.aggregateMethod.avg;
+                var y2 = myChart.addMeasureAxis('y','avg');
+                y2.ovverrideMin = 0.1;
+                y2.overrideMax = 2.8;
+                var f =d3.format(".1f");
+                myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
+                //putting the hr totals in order
+                x.addOrderRule('HR',true);
+                //creating the bargraph
+                myChart.addSeries('Player ', dimple.plot.bar);
+                //adding the animation based on the weight of the players
+                //there is a wide range of weight and the animation allows for the graph to reflect that neatly
 
-    </script>
+                //adding a legend
+                var myLegend = myChart.addLegend(1200,0,50,300,'Top');
+
+                var story = myChart.setStoryboard("weight");
+
+                //adjusting story duration from 3000 to 4000
+                story.frameDuration = 4000;
+                //ordering the story by weight
+                story.addOrderRule("weight");
+                myChart.draw();
+
+                myChart.legends = [];
+
+
+
+                svg.selectAll("title_text")
+                    .data(["handedness:"])
+                    .enter()
+                    .append("text")
+                    .attr("x", 1130)
+                    .attr("y", 7)
+                    .style("font-family", "sans-serif")
+                    .style("font-size", "10px")
+                    .style("color", "Black")
+                    .text(function (d) { return d; });
+            };
+
+        </script>
     </div>
 </head>
 <body>
 <script type = "text/javascript">
     //main function that reads from the csv and calls draw method
-d3.csv("baseball_data.csv",draw);
+    d3.csv("baseball_data.csv",draw);
 </script>
 </body>
 </html>

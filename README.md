@@ -43,6 +43,7 @@ because it gathered all the players together.
 <h2>Feedback</h2>
 I asked three of my classmates for feedback at different points in time.
 
+
 1.<b> The first person I received feedback </b> from suggested the graph of handedness and average didn't really show me anything.
 2.<b>The second person I received feedback</b> from suggested the graph of hr and handedness was better but still as a scatterplot
     required a person to look at it for a while to see the trend.
@@ -56,6 +57,12 @@ can be noticed right away.
 the trend of averages as well?
 7. Wouldn't weight be a significant factor in homeruns hit?
 8. The average still shows as a whole number rather than a decimal
+9. I ordered the weights from least to greatest in order to better show
+a story
 
 <h2>Resources</h2>
 Looked at http://bl.ocks.org/tybyers/736da90eefe0c347a1d6 to see how the graph in the lesson was created.
+
+<h2>Conclusion</h2>
+Weight and handedness are two significant factors in determining whether a baseball player
+is a good hitter both in terms of average and the number of homeruns that they hit.
