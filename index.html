@@ -5,6 +5,8 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
 
+
+
     <style>
         circle.dimple-series-1 {
             fill: red;
@@ -16,22 +18,26 @@
     </style>
     <div id="chartContainer">
     <script type="text/javascript">
+        //creating a container for the graph
         var svg = dimple.newSvg("#chartContainer",590,400);
+        //main function where it all takes place
         function draw(data) {
             /*
              D3.js setup code
              */
 
             "use strict";
-            debugger;
+            //commenting out debugger that was used to explore data
+            //debugger;
             var margin = 75,
                 width = 1400 - margin,
                 height = 600 - margin;
 
+            //creating title for graph
             d3.select("body")
                 .append("h2")
                 .text("Baseball HR Average VS Handedness");
-
+            //establishing chart size
             var svg = d3.select("body")
                 .append("svg")
                 .attr("width", width + margin)
@@ -46,19 +52,22 @@
             var myChart = new dimple.chart(svg, data);
 
 
-           // var x = myChart.addMeasureAxis("x", );
+           //category variable of handedness
             var x = myChart.addCategoryAxis("x", 'handedness');
+            //using the averages because there is definately less 'both' handedness than left and right
             x.aggregate =dimple.aggregateMethod.avg;
+            //creating both y measures
             var y =myChart.addMeasureAxis('y',"HR");
             y.aggregate = dimple.aggregateMethod.avg;
             var y2 = myChart.addMeasureAxis('y','avg');
 
             myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
-
+            //putting the hr totals in order
             x.addOrderRule('HR',true);
-
+            //creating the bargraph
             myChart.addSeries('Player', dimple.plot.bar);
-
+            //adding the animation based on the weight of the players
+            //there is a wide range of weight and the animation allows for the graph to reflect that neatly
             myChart.setStoryboard("weight");
 
             myChart.draw();
@@ -69,6 +78,7 @@
 </head>
 <body>
 <script type = "text/javascript">
+    //main function that reads from the csv and calls draw method
 d3.csv("baseball_data.csv",draw);
 </script>
 </body>

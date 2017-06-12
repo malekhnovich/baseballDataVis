@@ -3,7 +3,10 @@ Summary
 The dataset I worked is the baseball data set. It consists
 of 1,157 baseball players. The baseball player's handedness,
 height (in inches), batting average, home runs, and weight(in pounds)
-were all aspects of each player.
+were all aspects of each player. I decided to make the handedness of the players
+a categorical variable that I could use in comparison to the batter's average and homeruns hit.
+I also decided to use the weight of the players because my reviewers hypothesized that heavier players
+would be stronger and hit more homeruns.
 
 Design
 
@@ -31,3 +34,4 @@ can be noticed right away.
 5. Why is there a k on the y axis and why isn't average showing the number as a decimal
 6. Can we get the plot of the points to connect in order to show
 the trend of averages as well?
+7. Wouldn't weight be a significant factor in homeruns hit?
