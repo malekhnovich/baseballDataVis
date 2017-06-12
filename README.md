@@ -29,3 +29,5 @@ Feedback
 4. Bargraph of handedness and hr shows a specific trend that
 can be noticed right away.
 5. Why is there a k on the y axis and why isn't average showing the number as a decimal
+6. Can we get the plot of the points to connect in order to show
+the trend of averages as well?

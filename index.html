@@ -52,12 +52,14 @@
             var y =myChart.addMeasureAxis('y',"HR");
             y.aggregate = dimple.aggregateMethod.avg;
             var y2 = myChart.addMeasureAxis('y','avg');
-            y2.aggregate = dimple.aggregateMethod.avg;
+
             myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
 
             x.addOrderRule('HR',true);
 
             myChart.addSeries('Player', dimple.plot.bar);
+
+            myChart.setStoryboard("weight");
 
             myChart.draw();
         };
