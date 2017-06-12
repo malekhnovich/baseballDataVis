@@ -35,3 +35,6 @@ can be noticed right away.
 6. Can we get the plot of the points to connect in order to show
 the trend of averages as well?
 7. Wouldn't weight be a significant factor in homeruns hit?
+
+<h2>Resources</h2>
+Looked at http://bl.ocks.org/tybyers/736da90eefe0c347a1d6 to see how the graph in the lesson was created.
