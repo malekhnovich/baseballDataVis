@@ -41,11 +41,12 @@ because it gathered all the players together.
 
 
 <h2>Feedback</h2>
+I asked three of my classmates for feedback at different points in time.
 
-1.  The graph of handedness and average didn't really show me anything.
-2.  The graph of hr and handedness was better but still as a scatterplot
+1.<b> The first person I received feedback </b> from suggested the graph of handedness and average didn't really show me anything.
+2.<b>The second person I received feedback</b> from suggested the graph of hr and handedness was better but still as a scatterplot
     required a person to look at it for a while to see the trend.
-3.The graph of hr and handedness  with average equailing x2 confuses the viewer of the graph
+3.<b> The third person I received feedback </b> from suggested the graph of hr and handedness  with average equailing x2 confuses the viewer of the graph
 "keep it simple"
 
 4. Bargraph of handedness and hr shows a specific trend that
