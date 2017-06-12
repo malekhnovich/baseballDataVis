@@ -1,4 +1,4 @@
-Summary
+<h2>Summary</h2>
 
 The dataset I worked is the baseball data set. It consists
 of 1,157 baseball players. The baseball player's handedness,
@@ -8,7 +8,7 @@ a categorical variable that I could use in comparison to the batter's average an
 I also decided to use the weight of the players because my reviewers hypothesized that heavier players
 would be stronger and hit more homeruns.
 
-Design
+<h2>Design</h2>
 
 Immediately after I received the data, I knew I wanted to categorize the
 data based on a specific factor. I noticed that handedness was the only variable
@@ -21,7 +21,7 @@ change the graph type from a scatter plot to a bargraph which would
 depict the handedness of the batters and their average homerun output appropritely.
 
 
-Feedback
+<h2>Feedback</h2>
 
 1.  The graph of handedness and average didn't really show me anything.
 2.  The graph of hr and handedness was better but still as a scatterplot
