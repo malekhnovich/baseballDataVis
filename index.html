@@ -12,9 +12,15 @@
             fill: red;
         }
 
-        h2 {
+        h1 {
             text-align: center;
+            font-size: 48px;
         }
+        h3{
+            font-size: 36px;
+
+        }
+
     </style>
     <div id="chartContainer">
         <script type="text/javascript">
@@ -31,19 +37,30 @@
                 //debugger;
                 var margin = 75,
                     width = 1400 - margin,
-                    height = 600 - margin;
+                    height = 800 - margin;
 
                 //creating title for graph
                 d3.select("body")
-                    .append("h2")
-                    .text("Baseball HR/Average Total VS Handedness");
+                    .append("h1")
+                    .text("Baseball HR/Average Total VS Weight/Handedness")
+                    .append("h3")
+                    .text("What makes a Good Baseball Player at the Plate?")
+                    .append("h6")
+                    .text(" It is clear that baseball " +
+                        "players who weigh more are overall more likely to hit homeruns  than baseball " +
+                        "players that are lighter. ")
+                    .append("h6")
+                    .text("There is a clear trend among baseball players in the data that shows that right-hand"
+                        +"hitters are overall better hitters than both left-hand hitters and 'both'-hand hitters");
+                ;
+
                 //establishing chart size
                 var svg = d3.select("body")
                     .append("svg")
                     .attr("width", width + margin)
                     .attr("height", height + margin)
                     .append('g')
-                    .attr('class','chart');
+                    .attr('class','chart')
 
                 /*
                  Dimple.js Chart construction code
