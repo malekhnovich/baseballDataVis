@@ -50,11 +50,12 @@ change the graph type from a scatter plot to a bargraph which would
 depict the handedness of the batters and their average homerun output appropritely. At first, I wondered whether to depict
 the averages or the total for the handedness of the players. For <b>chart type</b>,  I decided to use the totals after recieving feedback
 because it gathered all the players together. For <b> x-axis encoding </b>, I used the categorical
-variable of handedness to seperate that categorical feature into 3 distinct groups.
-For <b> y-axis encoding </b>, I decided to use both the number of <b>homerun's hit</b> and the batting average </b>.
+variable of handedness to seperate that categorical feature into 3 distinct groups. I used a stacked bargarph depicting
+both the batting average and the number of homeruns hit, using blue and red to make the colors distinct.
+For <b> y-axis encoding </b>, I decided to use  the number of <b>homerun's hit</b>.
 The <b>legend </b> shows the different features that I wanted to look at along
-with the axes.
-
+with the axes. In addition, I also changed the abbreviations of the handedness attributes from 'R','L
+, and 'B' to 'Right','Left', and 'Both'.
 
 <h2>Feedback</h2>
 I asked three of my classmates for feedback at different points in time.
@@ -70,13 +71,19 @@ I asked three of my classmates for feedback at different points in time.
 
 4. Bargraph of handedness and hr shows a specific trend that
 can be noticed right away.
+
 5. Why is there a k on the y axis and why isn't average showing the number as a decimal
+
 6. Can we get the plot of the points to connect in order to show
 the trend of averages as well?
+
 7. Wouldn't weight be a significant factor in homeruns hit?
+
 8. The average still shows as a whole number rather than a decimal
+
 9. I ordered the weights from least to greatest in order to better show
 a story
+
 10. adjusted the duration of the story frame in order to provide viewer more time
 to see the changes in the weight.
 
