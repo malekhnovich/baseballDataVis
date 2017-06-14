@@ -26,6 +26,9 @@
         <script type="text/javascript">
             //creating a container for the graph
             var svg = dimple.newSvg("#chartContainer",590,400);
+
+            //creating a container for graph 2
+            var svg2 = dimple.newSvg('#chartContainer',800,600);
             //main function where it all takes place
             function draw(data) {
                 /*
@@ -42,16 +45,17 @@
                 //creating title for graph
                 d3.select("body")
                     .append("h1")
-                    .text("Baseball HR/Average Total VS Weight/Handedness")
+                    .text("Baseball HR/Average Total VS Handedness")
                     .append("h3")
                     .text("What makes a Good Baseball Player at the Plate?")
                     .append("h6")
-                    .text(" It is clear that baseball " +
-                        "players who weigh more are overall more likely to hit homeruns  than baseball " +
-                        "players that are lighter. ")
+                    .text("There is a clear trend among baseball players in the data that shows that left-hand hitters" +
+                        " hit more homeruns and hit for a better average than both right and both hand hitters")
                     .append("h6")
-                    .text("There is a clear trend among baseball players in the data that shows that right-hand"
-                        +"hitters are overall better hitters than both left-hand hitters and 'both'-hand hitters");
+                    .text(" It is clear that baseball " +
+                        "players who weigh more are overall more likely to hit homeruns and hit for a better" +
+                        "average  than baseball " +
+                        "players that are lighter. ");
                 ;
 
                 //establishing chart size
@@ -60,7 +64,19 @@
                     .attr("width", width + margin)
                     .attr("height", height + margin)
                     .append('g')
+                    .attr('class','chart');
+
+
+
+                var svg2 = d3.select("body")
+                    .append("svg")
+                    .attr("width", width + margin)
+                    .attr("height", height + margin)
+                    .append('g')
                     .attr('class','chart')
+                ;
+
+
 
                 /*
                  Dimple.js Chart construction code
@@ -68,31 +84,77 @@
 
                 var myChart = new dimple.chart(svg, data);
 
+                //create another chart and use weight as the x
+                var chart2 = new dimple.chart(svg2,data);
 
                 //category variable of handedness
                 var x = myChart.addCategoryAxis("x", 'handedness');
                 //using the averages because there is definately less 'both' handedness than left and right
+
+
 
                 //creating both y measures
                 var y =myChart.addMeasureAxis('y',"HR");
                 //changing the title from the default
                 y.title ="Home Runs";
                 //locking bounds
-                y.overrideMax = 2000;
-                y.overrideMin = 50;
+                y.overrideMax = 200;
+                y.overrideMin = 10;
 
-                y.aggregate = dimple.aggregateMethod.avg;
+
                 var y2 = myChart.addMeasureAxis('y','avg');
+
+                var chart2axis = chart2.addAxis('x','weight');
+
+                chart2axis.ticks = 10;
+
+
+
+
+
+
+
+
+                var chart2y2 = chart2.addMeasureAxis('y','HR');
+
+                var chart2avg = chart2.addMeasureAxis('y','avg');
+
+
+                chart2avg.title = 'Batting Average';
+                chart2y2.title = 'Home Runs';
                 //changing the title from the default
                 y2.title = "Batting Average";
+
                 y2.ovverrideMin = 0.1;
-                y2.overrideMax = 2.8;
+                y2.overrideMax = 0.7;
+
+                chart2avg.overrideMax = 0.7
+                ;
+
                 var f =d3.format(".1f");
-                myChart.addSeries("Batting Average",dimple.plot.bar,[x,y2]);
+                var battingSeries = myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
+                //chart2.addMeasureAxis('y','avg');
+
+                //adding another series to display the home runs hit for weight
+                var series2 = chart2.addSeries("Home Runs",dimple.plot.area,[chart2axis,chart2y2]);
+
+
+                //adding another series to display the batting average for weight
+                var seriesAvg2 = chart2.addSeries("Batting Average",dimple.plot.area,[chart2axis,chart2avg]);
+
+
+                seriesAvg2.aggregate = dimple.aggregateMethod.avg;
+
+                battingSeries.aggregate = dimple.aggregateMethod.avg;
+                series2.aggregate = dimple.aggregateMethod.avg;
+
+
+                //chart2.addSeries('Batting Average',dimple.plot.scatter,[x2,y2]);
                 //putting the hr totals in order
                 x.addOrderRule('HR',true);
                 //creating the bargraph
-                var hands = myChart.addSeries('Player ', dimple.plot.bar);
+                var hands = myChart.addSeries('Player', dimple.plot.bar);
+                hands.aggregate = dimple.aggregateMethod.avg;
 
                 //adding the animation based on the weight of the players
                 //there is a wide range of weight and the animation allows for the graph to reflect that neatly
@@ -100,15 +162,21 @@
                 //adding a legend
                 var myLegend = myChart.addLegend(1200,0,50,300,'Top');
 
-                var story = myChart.setStoryboard("weight");
+
+                //adding the second legend
+                var legend2 = chart2.addLegend(1200,0,50,500,'Top');
+
+                //var story = myChart.setStoryboard("weight");
 
                 //adjusting story duration from 3000 to 4000
-                story.frameDuration = 4000;
+                //story.frameDuration = 4000;
                 //ordering the story by weight
-                story.addOrderRule("weight");
+                //story.addOrderRule("weight");
                 myChart.draw();
+                chart2.draw();
 
                 myChart.legends = [];
+                chart2.legend2 = [];
 
 
 

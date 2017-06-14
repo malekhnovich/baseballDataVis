@@ -27,9 +27,9 @@ even out of the stadium. By showing the statistics in a bargraph, it is easy to 
 of each type of hitter.
 
 <h2> How does Handedness Affect a baseball player's ability at the plate?</h2>
-There is a clear trend among baseball players in the data that shows that right-hand
-hitters are overall better hitters than both left-hand hitters and 'both'-hand hitters.
-Left-hand hitters might not be as strong and have a lower batting average than right-hand hitters,
+There is a clear trend among baseball players in the data that shows that left-hand
+hitters are overall better hitters than both right-hand hitters and 'both'-hand hitters.
+Right-hand hitters might not be as strong and have a lower batting average than left-hand hitters,
 but they do hit more homeruns and hit for a higher average than both-hand hitters.
 
 <h2>Key Findings : Conclusion</h2>
@@ -50,7 +50,7 @@ change the graph type from a scatter plot to a bargraph which would
 depict the handedness of the batters and their average homerun output appropritely. At first, I wondered whether to depict
 the averages or the total for the handedness of the players. For <b>chart type</b>,  I decided to use the totals after recieving feedback
 because it gathered all the players together. For <b> x-axis encoding </b>, I used the categorical
-variable of handedness to seperate that categorical feature into 3 distinct groups. I used a stacked bargarph depicting
+variable of handedness to seperate that categorical feature into 3 distinct groups. I used a line graph with two lines
 both the batting average and the number of homeruns hit, using blue and red to make the colors distinct.
 For <b> y-axis encoding </b>, I decided to use  the number of <b>homerun's hit</b>.
 The <b>legend </b> shows the different features that I wanted to look at along
@@ -86,6 +86,10 @@ a story
 
 10. adjusted the duration of the story frame in order to provide viewer more time
 to see the changes in the weight.
+
+11. Recommended that I create an additional graph and split out the weight aspect of the data
+
+
 
 
 <h2>Resources</h2>
