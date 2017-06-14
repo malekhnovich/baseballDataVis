@@ -30,7 +30,41 @@
             //creating a container for graph 2
             var svg2 = dimple.newSvg('#chartContainer',800,600);
             //main function where it all takes place
-            function draw(data) {
+
+            //function used to clean up x2 values for the axis
+            var cleanAxis = function (axis, oneInEvery) {
+                // This should have been called after draw, otherwise do nothing
+                if (axis.shapes.length > 0) {
+                    // Leave the first label
+                    var del = false;
+                    // If there is an interval set
+                    if (oneInEvery > 1) {
+                        // Operate on all the axis text
+                        axis.shapes.selectAll("text")
+                            .each(function (d) {
+                                // Remove all but the nth label
+                                if (del % oneInEvery !== 0) {
+                                    this.remove();
+                                    // Find the corresponding tick line and remove
+                                    axis.shapes.selectAll("line").each(function (d2) {
+                                        if (d === d2) {
+                                            this.remove();
+                                        }
+                                    });
+                                }
+                                del += 1;
+                            });
+                    }
+                }
+            };
+
+
+
+
+
+
+
+                    function draw(data) {
                 /*
                  D3.js setup code
                  */
@@ -103,19 +137,27 @@
 
 
                 var y2 = myChart.addMeasureAxis('y','avg');
+                y2.title = "Batting Average";
 
-                var chart2axis = chart2.addAxis('x','weight');
-
-                chart2axis.ticks = 10;
-
-
+                y2.ovverrideMin = 0.1;
+                y2.overrideMax = 0.7;
 
 
+
+                var f =d3.format(".1f");
+                var battingSeries = myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
+
+
+                //adding a legend
+                var myLegend = myChart.addLegend(1200,0,50,300,'Top');
 
 
 
 
                 var chart2y2 = chart2.addMeasureAxis('y','HR');
+                var chart2axis = chart2.addAxis('x','weight');
+
+                chart2axis.ticks = 10;
 
                 var chart2avg = chart2.addMeasureAxis('y','avg');
 
@@ -123,24 +165,22 @@
                 chart2avg.title = 'Batting Average';
                 chart2y2.title = 'Home Runs';
                 //changing the title from the default
-                y2.title = "Batting Average";
 
-                y2.ovverrideMin = 0.1;
-                y2.overrideMax = 0.7;
+                chart2avg.overrideMax = 0.7;
 
-                chart2avg.overrideMax = 0.7
-                ;
 
-                var f =d3.format(".1f");
-                var battingSeries = myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
-                //chart2.addMeasureAxis('y','avg');
+
+
+
+
+                        //chart2.addMeasureAxis('y','avg');
 
                 //adding another series to display the home runs hit for weight
-                var series2 = chart2.addSeries("Home Runs",dimple.plot.area,[chart2axis,chart2y2]);
+                var series2 = chart2.addSeries("Home Runs",dimple.plot.line,[chart2axis,chart2y2]);
 
 
                 //adding another series to display the batting average for weight
-                var seriesAvg2 = chart2.addSeries("Batting Average",dimple.plot.area,[chart2axis,chart2avg]);
+                var seriesAvg2 = chart2.addSeries("Batting Average",dimple.plot.line,[chart2axis,chart2avg]);
 
 
                 seriesAvg2.aggregate = dimple.aggregateMethod.avg;
@@ -159,8 +199,6 @@
                 //adding the animation based on the weight of the players
                 //there is a wide range of weight and the animation allows for the graph to reflect that neatly
 
-                //adding a legend
-                var myLegend = myChart.addLegend(1200,0,50,300,'Top');
 
 
                 //adding the second legend
@@ -175,6 +213,7 @@
                 myChart.draw();
                 chart2.draw();
 
+                cleanAxis(chart2axis,5);
                 myChart.legends = [];
                 chart2.legend2 = [];
 
