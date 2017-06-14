@@ -95,3 +95,4 @@ to see the changes in the weight.
 <h2>Resources</h2>
 Looked at http://bl.ocks.org/tybyers/736da90eefe0c347a1d6 to see how the graph in the lesson was created.
 
+https://stackoverflow.com/questions/23305230/how-do-you-reduce-the-number-of-y-axis-ticks-in-dimple-js
