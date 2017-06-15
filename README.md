@@ -30,7 +30,7 @@ of each type of hitter.
 There is a clear trend among baseball players in the data that shows that left-hand
 hitters are overall better hitters than both right-hand hitters and 'both'-hand hitters.
 Right-hand hitters might not be as strong and have a lower batting average than left-hand hitters,
-but they do hit more homeruns and hit for a higher average than both-hand hitters.
+but they do hit more homeruns  than both-hand hitters.
 
 <h2>Key Findings : Conclusion</h2>
 Weight and handedness are two significant factors in determining whether a baseball player
