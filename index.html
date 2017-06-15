@@ -28,211 +28,194 @@
 
             //main function where it all takes place
 
-            //function used to clean up x2 values for the axis
-            var cleanAxis = function (axis, oneInEvery) {
-                // This should have been called after draw, otherwise do nothing
-                if (axis.shapes.length > 0) {
-                    // Leave the first label
-                    var del = false;
-                    // If there is an interval set
-                    if (oneInEvery > 1) {
-                        // Operate on all the axis text
-                        axis.shapes.selectAll("text")
-                            .each(function (d) {
-                                // Remove all but the nth label
-                                if (del % oneInEvery !== 0) {
-                                    this.remove();
-                                    // Find the corresponding tick line and remove
-                                    axis.shapes.selectAll("line").each(function (d2) {
-                                        if (d === d2) {
-                                            this.remove();
-                                        }
-                                    });
-                                }
-                                del += 1;
-                            });
-                    }
-                }
-            };
 
 
 
 
+    function draw(data) {
+        /*
+         D3.js setup code
+         */
+
+        "use strict";
+        //commenting out debugger that was used to explore data
+        //debugger;
+        var margin = 75,
+            width = 1400 - margin,
+            height = 800 - margin;
+
+        //creating title for graph
+        d3.select("body")
+            .append("h1")
+            .text("Baseball HR/Average Total VS Handedness")
+            .append("h3")
+            .text("What makes a Good Baseball Player at the Plate?")
+            .append("h6")
+            .text("There is a clear trend among baseball players in the data that shows that left-hand hitters" +
+                " hit more homeruns and hit for a better average than  right  hand hitters")
+            .append("h6")
+            .text(" It is clear that baseball " +
+                "players who weigh more are overall more likely to hit homeruns. However, it is unclear that heavier players hit" +
+                " for a better average  than baseball " +
+                "players that are lighter. ");
+        ;
+
+        //establishing chart size
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width + margin)
+            .attr("height", height + margin)
+            .append('g')
+            .attr('class','chart');
 
 
 
-                    function draw(data) {
-                /*
-                 D3.js setup code
-                 */
-
-                "use strict";
-                //commenting out debugger that was used to explore data
-                //debugger;
-                var margin = 75,
-                    width = 1400 - margin,
-                    height = 800 - margin;
-
-                //creating title for graph
-                d3.select("body")
-                    .append("h1")
-                    .text("Baseball HR/Average Total VS Handedness")
-                    .append("h3")
-                    .text("What makes a Good Baseball Player at the Plate?")
-                    .append("h6")
-                    .text("There is a clear trend among baseball players in the data that shows that left-hand hitters" +
-                        " hit more homeruns and hit for a better average than both right and both hand hitters")
-                    .append("h6")
-                    .text(" It is clear that baseball " +
-                        "players who weigh more are overall more likely to hit homeruns. However, it is unclear that heavier players hit" +
-                        " for a better average  than baseball " +
-                        "players that are lighter. ");
-                ;
-
-                //establishing chart size
-                var svg = d3.select("body")
-                    .append("svg")
-                    .attr("width", width + margin)
-                    .attr("height", height + margin)
-                    .append('g')
-                    .attr('class','chart');
+        var svg2 = d3.select("body")
+            .append("svg")
+            .attr("width", width + margin)
+            .attr("height", height + margin)
+            .append('g')
+            .attr('class','chart')
+        ;
 
 
 
-                var svg2 = d3.select("body")
-                    .append("svg")
-                    .attr("width", width + margin)
-                    .attr("height", height + margin)
-                    .append('g')
-                    .attr('class','chart')
-                ;
+        /*
+         Dimple.js Chart construction code
+         */
+
+        var myChart = new dimple.chart(svg, data);
+
+
+        //category variable of handedness
+        var x = myChart.addCategoryAxis("x", 'handedness');
+        //using the averages because there is definately less 'both' handedness than left and right
 
 
 
-                /*
-                 Dimple.js Chart construction code
-                 */
-
-                var myChart = new dimple.chart(svg, data);
-
-                //create another chart and use weight as the x
-                var chart2 = new dimple.chart(svg2,data);
-
-                //category variable of handedness
-                var x = myChart.addCategoryAxis("x", 'handedness');
-                //using the averages because there is definately less 'both' handedness than left and right
+        //creating both y measures
+        var y =myChart.addMeasureAxis('y',"HR");
+        //changing the title from the default
+        y.title ="Home Runs";
+        //locking bounds
+        y.overrideMax = 200;
+        y.overrideMin = 10;
 
 
+        var y2 = myChart.addMeasureAxis('y','avg');
+        y2.title = "Batting Average";
 
-                //creating both y measures
-                var y =myChart.addMeasureAxis('y',"HR");
-                //changing the title from the default
-                y.title ="Home Runs";
-                //locking bounds
-                y.overrideMax = 200;
-                y.overrideMin = 10;
+        //needed to make y2 scale work properly
+        y2.overrideMin = 0.0;
+        y2.overrideMax = 0.7;
 
+        var f =d3.format(".1f");
+        var battingSeries = myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
 
-                var y2 = myChart.addMeasureAxis('y','avg');
-                y2.title = "Batting Average";
-
-                y2.ovverrideMin = 0.1;
-                y2.overrideMax = 0.7;
+        //adding a legend
+        var myLegend = myChart.addLegend(1200,0,50,300,'Top');
+        x.addOrderRule('HR',true);
+        //creating the bargraph
+        var hands = myChart.addSeries('Player', dimple.plot.bar);
+        hands.aggregate = dimple.aggregateMethod.avg;
 
 
 
-                var f =d3.format(".1f");
-                var battingSeries = myChart.addSeries("Batting Average",dimple.plot.scatter,[x,y2]);
+        //___CHART 2____
+
+        //create another chart and use weight as the x
+        var chart2 = new dimple.chart(svg2,data);
 
 
-                //adding a legend
-                var myLegend = myChart.addLegend(1200,0,50,300,'Top');
+        var chart2y2 = chart2.addMeasureAxis('y','HR');
+        var chart2axis = chart2.addAxis('x','weight');
+
+        chart2axis.ticks = 10;
+
+        var chart2avg = chart2.addMeasureAxis('y','avg');
+
+        chart2avg.title = 'Batting Average';
+        chart2y2.title = 'Home Runs';
+        //changing the title from the default
+
+        chart2avg.overrideMax = 0.7;
 
 
+        //chart2.addMeasureAxis('y','avg');
+
+        //adding another series to display the home runs hit for weight
+        var series2 = chart2.addSeries("Home Runs",dimple.plot.line,[chart2axis,chart2y2]);
+
+        //adding another series to display the batting average for weight
+        var seriesAvg2 = chart2.addSeries("Batting Average",dimple.plot.line,[chart2axis,chart2avg]);
+
+        seriesAvg2.aggregate = dimple.aggregateMethod.avg;
+
+        battingSeries.aggregate = dimple.aggregateMethod.avg;
+        series2.aggregate = dimple.aggregateMethod.avg;
+
+        //chart2.addSeries('Batting Average',dimple.plot.scatter,[x2,y2]);
+        //putting the hr totals in order
+
+        //adding the animation based on the weight of the players
+        //there is a wide range of weight and the animation allows for the graph to reflect that neatly
+
+        //adding the second legend
+        var legend2 = chart2.addLegend(1200,0,50,500,'Top');
 
 
-                var chart2y2 = chart2.addMeasureAxis('y','HR');
-                var chart2axis = chart2.addAxis('x','weight');
+        myChart.draw();
+        chart2.draw();
 
-                chart2axis.ticks = 10;
+        cleanAxis(chart2axis,5);
+        myChart.legends = [];
+        chart2.legend2 = [];
 
-                var chart2avg = chart2.addMeasureAxis('y','avg');
-
-
-                chart2avg.title = 'Batting Average';
-                chart2y2.title = 'Home Runs';
-                //changing the title from the default
-
-                chart2avg.overrideMax = 0.7;
-
-
-
-
-
-
-                        //chart2.addMeasureAxis('y','avg');
-
-                //adding another series to display the home runs hit for weight
-                var series2 = chart2.addSeries("Home Runs",dimple.plot.line,[chart2axis,chart2y2]);
-
-
-                //adding another series to display the batting average for weight
-                var seriesAvg2 = chart2.addSeries("Batting Average",dimple.plot.line,[chart2axis,chart2avg]);
-
-
-                seriesAvg2.aggregate = dimple.aggregateMethod.avg;
-
-                battingSeries.aggregate = dimple.aggregateMethod.avg;
-                series2.aggregate = dimple.aggregateMethod.avg;
-
-
-                //chart2.addSeries('Batting Average',dimple.plot.scatter,[x2,y2]);
-                //putting the hr totals in order
-                x.addOrderRule('HR',true);
-                //creating the bargraph
-                var hands = myChart.addSeries('Player', dimple.plot.bar);
-                hands.aggregate = dimple.aggregateMethod.avg;
-
-                //adding the animation based on the weight of the players
-                //there is a wide range of weight and the animation allows for the graph to reflect that neatly
-
-
-
-                //adding the second legend
-                var legend2 = chart2.addLegend(1200,0,50,500,'Top');
-
-                //var story = myChart.setStoryboard("weight");
-
-                //adjusting story duration from 3000 to 4000
-                //story.frameDuration = 4000;
-                //ordering the story by weight
-                //story.addOrderRule("weight");
-                myChart.draw();
-                chart2.draw();
-
-                cleanAxis(chart2axis,5);
-                myChart.legends = [];
-                chart2.legend2 = [];
-
-
-
-                svg.selectAll("title_text")
-                    .data(["handedness:"])
-                    .enter()
-                    .append("text")
-                    .attr("x", 1130)
-                    .attr("y", 7)
-                    .style("font-family", "sans-serif")
-                    .style("font-size", "10px")
-                    .style("color", "Black")
-                    .text(function (d) { return d; });
-            };
+        svg.selectAll("title_text")
+            .data(["handedness:"])
+            .enter()
+            .append("text")
+            .attr("x", 1130)
+            .attr("y", 7)
+            .style("font-family", "sans-serif")
+            .style("font-size", "10px")
+            .style("color", "Black")
+            .text(function (d) { return d; });
+    };
 
         </script>
     </div>
 </head>
 <body>
 <script type = "text/javascript">
+
+
+    //function used to clean up x2 values for the axis
+    var cleanAxis = function (axis, oneInEvery) {
+        // This should have been called after draw, otherwise do nothing
+        if (axis.shapes.length > 0) {
+            // Leave the first label
+            var del = false;
+            // If there is an interval set
+            if (oneInEvery > 1) {
+                // Operate on all the axis text
+                axis.shapes.selectAll("text")
+                    .each(function (d) {
+                        // Remove all but the nth label
+                        if (del % oneInEvery !== 0) {
+                            this.remove();
+                            // Find the corresponding tick line and remove
+                            axis.shapes.selectAll("line").each(function (d2) {
+                                if (d === d2) {
+                                    this.remove();
+                                }
+                            });
+                        }
+                        del += 1;
+                    });
+            }
+        }
+    };
     //main function that reads from the csv and calls draw method
     d3.csv("baseball_data.csv",draw);
 </script>
